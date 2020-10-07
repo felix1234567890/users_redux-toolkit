@@ -1,10 +1,12 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import languageReducer from "./languageReducer";
 import userReducer from "./userReducer";
+import loadingReducer from "./loadingReducer";
 
 const rootReducer = combineReducers({
-  language: languageReducer,
   users: userReducer,
+  language: languageReducer,
+  loading: loadingReducer,
 });
 export type RootState = ReturnType<typeof rootReducer>;
 

@@ -1,39 +1,32 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./reducers";
-import { setLanguage } from "./reducers/languageReducer";
+import { loadUsers } from "./reducers/userReducer";
+import { setLoading } from "./reducers/loadingReducer";
+import { useTranslation, UseTranslationResponse } from "react-i18next";
+import Header from "./components/Header";
 
 function App() {
   const dispatch = useDispatch();
   const { language } = useSelector((state: RootState) => state);
+  const { i18n }: UseTranslationResponse = useTranslation();
 
-  const changeLanguage = () => {
-    dispatch(setLanguage());
-  };
   useEffect(() => {
-    console.log(language);
-  }, [language]);
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <button onClick={changeLanguage}>change</button>
-    </div>
-  );
+    dispatch(setLoading(true));
+    fetch("./users.json")
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(loadUsers(data));
+      });
+    dispatch(setLoading(false));
+  }, [dispatch]);
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
+
+  return <Header />;
 }
 
 export default App;
