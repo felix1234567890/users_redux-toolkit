@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ValueType } from "react-select";
+import { SortOrder } from "../components/Filters";
 
 export interface User {
   name: string;
@@ -40,9 +42,48 @@ const usersSlice = createSlice({
       users.sort((a: any, b: any) => a.country - b.country);
       state.filteredUsers = users;
     },
+    sortUsers(state, action: PayloadAction<ValueType<SortOrder>>) {
+      const { value } = action.payload as SortOrder;
+      let sortedUsers;
+      switch (value) {
+        case "desc":
+          sortedUsers = state.users.sort((a: User, b: User) => {
+            return b.age - a.age;
+          });
+          break;
+        case "asc":
+          sortedUsers = state.users.sort((a: User, b: User) => {
+            return a.age - b.age;
+          });
+          break;
+        case "under40":
+          sortedUsers = state.users
+            .filter((user: User) => user.age < 40)
+            .sort((a: User, b: User) => a.age - b.age);
+          break;
+        case "over40":
+          sortedUsers = state.users
+            .filter((user: User) => user.age > 40)
+            .sort((a: User, b: User) => a.age - b.age);
+          break;
+        case "female":
+          sortedUsers = state.users.filter(
+            (user: User) => user.gender === "female"
+          );
+          break;
+        case "male":
+          sortedUsers = state.users.filter(
+            (user: User) => user.gender === "male"
+          );
+          break;
+        default:
+          sortedUsers = state.users;
+      }
+      state.filteredUsers = sortedUsers;
+    },
   },
 });
 
 export default usersSlice.reducer;
 
-export const { loadUsers, filterUsers } = usersSlice.actions;
+export const { loadUsers, filterUsers, sortUsers } = usersSlice.actions;

@@ -6,6 +6,7 @@ import { loadUsers } from "./reducers/userReducer";
 import { setLoading } from "./reducers/loadingReducer";
 import { useTranslation, UseTranslationResponse } from "react-i18next";
 import Header from "./components/Header";
+import Filters from "./components/Filters";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,12 @@ function App() {
     i18n.changeLanguage(language);
   }, [i18n, language]);
 
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <Filters />
+    </>
+  );
 }
 
 export default App;
