@@ -8,6 +8,7 @@ import { useTranslation, UseTranslationResponse } from "react-i18next";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import UsersList from "./components/UsersList";
+import Pagination from "./components/Pagination";
 
 export interface PaginationState {
   pageNumber: number;
@@ -39,11 +40,30 @@ function App() {
     i18n.changeLanguage(language);
   }, [i18n, language]);
 
+  const increaseNumber = (): void => {
+    setPagination((prevState) => ({
+      ...prevState,
+      pageNumber: prevState.pageNumber + 1,
+    }));
+  };
+  const decreaseNumber = (): void => {
+    setPagination((prevState) => ({
+      ...prevState,
+      pageNumber: prevState.pageNumber - 1,
+    }));
+  };
+
   return (
     <>
       <Header />
       <Filters />
       <UsersList setPagination={setPagination} pagination={pagination} />
+      <Pagination
+        pageNumber={pagination.pageNumber}
+        pageCount={pagination.pageCount}
+        increaseNumber={increaseNumber}
+        decreaseNumber={decreaseNumber}
+      />
     </>
   );
 }
