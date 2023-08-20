@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ValueType } from "react-select";
+import { SingleValue } from "react-select";
 import { SortOrder } from "../components/Filters";
 
 export interface User {
@@ -42,7 +42,7 @@ const usersSlice = createSlice({
       users.sort((a: any, b: any) => a.country - b.country);
       state.filteredUsers = users;
     },
-    sortUsers(state, action: PayloadAction<ValueType<SortOrder>>) {
+    sortUsers(state, action: PayloadAction<SingleValue<SortOrder>>) {
       const { value } = action.payload as SortOrder;
       let sortedUsers;
       switch (value) {

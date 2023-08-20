@@ -1,11 +1,11 @@
 import React from "react";
-import { useTranslation, UseTranslationResponse } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setLanguage } from "../reducers/languageReducer";
 import { filterUsers } from "../reducers/userReducer";
 
 const Header = () => {
-  const { t }: UseTranslationResponse = useTranslation();
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const changeLanguage = (): void => {

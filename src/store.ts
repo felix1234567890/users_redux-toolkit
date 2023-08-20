@@ -4,9 +4,9 @@ import reducer from "./reducers";
 const store = configureStore({
   reducer,
 });
-if (process.env.NODE_ENV === "development" && module.hot) {
-  module.hot.accept("./reducers", () => {
-    const newRootReducer = require("./reducers").default;
+if (import.meta.env.DEV && import.meta.hot) {
+  import.meta.hot.accept('./reducers', async () => {
+    const newRootReducer = (await import('./reducers')).default;
     store.replaceReducer(newRootReducer);
   });
 }

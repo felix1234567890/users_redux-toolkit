@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import Select, { ValueType } from "react-select";
+import Select, { SingleValue } from "react-select";
 import { RootState } from "../reducers";
 import { sortUsers } from "../reducers/userReducer";
 import selectStyles from "../selectStyles";
@@ -16,7 +16,7 @@ const Filters = () => {
 
   const { sortOrder } = useSelector((state: RootState) => state.users);
 
-  const sort = (srtOrder: ValueType<SortOrder>) => {
+  const sort = (srtOrder: SingleValue<SortOrder>) => {
     dispatch(sortUsers(srtOrder));
   };
 

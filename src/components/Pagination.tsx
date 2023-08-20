@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useTranslation, UseTranslationResponse } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 interface PaginationProps {
   pageCount: number;
@@ -14,7 +14,7 @@ const Pagination: FC<PaginationProps> = ({
   increaseNumber,
   decreaseNumber,
 }) => {
-  const { t }: UseTranslationResponse = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className="buttons">
       {`${pageNumber} / ${pageCount}`}

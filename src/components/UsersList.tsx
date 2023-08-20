@@ -18,10 +18,10 @@ interface UsersListProps {
 
 const UsersList: FC<UsersListProps> = ({ pagination, setPagination }) => {
   const [shownUsers, setShownUsers] = useState<User[]>([]);
-  const {
-    loading,
-    users: { users, filteredUsers, search, sortOrder },
-  } = useSelector((state: RootState) => state);
+  const loading = useSelector((state: RootState) => state.language);
+  const usersSelector = useSelector((state: RootState) => state.users);
+  const {users, filteredUsers, search, sortOrder} = usersSelector
+
 
   const paginateUsers = (
     users: User[],

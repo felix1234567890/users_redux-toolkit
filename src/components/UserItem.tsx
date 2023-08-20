@@ -1,9 +1,9 @@
 import React from "react";
-import { useTranslation, UseTranslationResponse } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { User } from "../reducers/userReducer";
 
 const UserItem = ({ name, email, photo, country, gender, age }: User) => {
-  const { t }: UseTranslationResponse = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <article className="card">

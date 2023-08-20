@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./reducers";
 import { loadUsers } from "./reducers/userReducer";
 import { setLoading } from "./reducers/loadingReducer";
-import { useTranslation, UseTranslationResponse } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import UsersList from "./components/UsersList";
@@ -18,8 +18,8 @@ export interface PaginationState {
 
 function App() {
   const dispatch = useDispatch();
-  const { language } = useSelector((state: RootState) => state);
-  const { i18n }: UseTranslationResponse = useTranslation();
+  const  language  = useSelector((state: RootState) => state.language);
+  const { i18n } = useTranslation();
   const [pagination, setPagination] = useState<PaginationState>({
     pageNumber: 1,
     itemsPerPage: 6,
